@@ -12,13 +12,23 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      packages.${system}.default = pkgs.mindustry;
+      packages.${system} = {
+        default = pkgs.mindustry;
+        server = pkgs.mindustry-server;
+      };
 
-      apps.${system}.default = {
-        type = "app";
-        program = "${pkgs.mindustry}/bin/mindustry";
+      apps.${system} = {
+        default = {
+          type = "app";
+          program = "${pkgs.mindustry}/bin/mindustry";
+          meta.description = "Launch Mindustry";
+        };
 
-        meta.description = "Launch Mindustry";
+        server = {
+          type = "app";
+          program = "${pkgs.mindustry-server}/bin/mindustry-server";
+          meta.description = "Launch dedicated Mindustry server";
+        };
       };
     };
 

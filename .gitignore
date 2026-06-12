@@ -1,0 +1,6 @@
+# Mindustry local server data
+config/
+
+# Nix build result symlink
+result
+result-*
