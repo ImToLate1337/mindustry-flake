@@ -182,11 +182,13 @@ Test Nix:
 nix --version
 ```
 
-Then run Mindustry:
+Then run Mindustry with nixGL:
 
 ```bash
-nix run github:ImToLate1337/mindustry-flake
+nix run --impure github:ImToLate1337/mindustry-flake#nixgl
 ```
+
+The --impure flag is needed because nixGL has to detect and use the graphics drivers from the host Linux system.
 
 Or run the dedicated server:
 
