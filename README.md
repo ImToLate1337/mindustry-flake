@@ -1,147 +1,121 @@
-# Mindustry Nix Flake
+MINDUSTRY NIX FLAKE
+Launch Mindustry and its dedicated server directly from GitHub using Nix.
 
-A minimal Nix flake for running the open-source game **Mindustry** directly from GitHub.
+ABOUT
 
-This repository provides two flake apps:
+Mindustry Nix Flake is a small flake wrapper for the open-source game Mindustry.
 
-- `default` — launches the Mindustry game client
-- `server` — launches the dedicated Mindustry server
+This repository does not contain the full game source code.
+Instead, it uses Nixpkgs to provide reproducible commands for launching:
 
-## Run the game
+the Mindustry game client
+the Mindustry dedicated server
 
-```
+The goal is simple:
+
 nix run github:ImToLate1337/mindustry-flake
-```
 
-## Run the dedicated server
+No manual package install.
+No searching for the right server jar.
+Just run it with Nix.
 
-```
+RUN
+Launch the game client
+nix run github:ImToLate1337/mindustry-flake
+
+This is the same as:
+
+nix run github:ImToLate1337/mindustry-flake#default
+Launch the dedicated server
 nix run github:ImToLate1337/mindustry-flake#server
-```
 
-After the server starts, you can type commands into the Mindustry server console.
+After the server starts, you can type Mindustry server commands directly into the terminal.
 
-To see available commands:
+SERVER QUICK START
 
-```
-help
-```
+Inside the Mindustry server console, list maps with:
 
-To list maps:
-
-```
 maps all
-```
 
-To host a PvP game:
+Start a PvP server with:
 
-```
 host <mapname> pvp
-```
 
 Example:
 
-```
 host Fortress pvp
-```
 
-To check the server status:
+Check server status:
 
-```
 status
-```
 
-To stop the hosted game:
+Show connected players:
 
-```
+players
+
+Stop the current game:
+
 stop
-```
 
-To close the server:
+Exit the server:
 
-```
 exit
-```
+NIXOS SETUP
 
-## NixOS usage
+On NixOS, flakes need to be enabled.
 
-On NixOS, make sure flakes are enabled in your NixOS configuration.
+Add this to your configuration.nix or your NixOS module:
 
-Add this to your `configuration.nix` or your NixOS module:
-
-```
 nix.settings.experimental-features = [ "nix-command" "flakes" ];
-```
 
-Then rebuild your system:
+Then rebuild:
 
-```
 sudo nixos-rebuild switch
-```
 
-After that, run the game:
+Now run the game:
 
-```
 nix run github:ImToLate1337/mindustry-flake
-```
 
 Or run the server:
 
-```
 nix run github:ImToLate1337/mindustry-flake#server
-```
+OTHER LINUX DISTROS
 
-## Other Linux distributions
+This flake also works on non-NixOS Linux distributions, as long as Nix is installed.
 
-This flake can also be used on other Linux distributions, for example:
+Examples:
 
-- Fedora
-- Ubuntu
-- Debian
-- Arch Linux
+Fedora
+Ubuntu
+Debian
+Arch Linux
+openSUSE
+Install Nix
 
-You do not need to use NixOS. You only need the Nix package manager.
+Use the official multi-user Nix installer:
 
-### Install Nix
-
-Install Nix with the official multi-user installer:
-
-```
 curl -L https://nixos.org/nix/install | sh -s -- --daemon
-```
 
 After installation, restart your terminal or log out and back in.
 
-### Enable flakes
+Enable flakes
 
 Create the Nix config directory:
 
-```
 mkdir -p ~/.config/nix
-```
 
-Enable the modern Nix command and flakes:
+Enable flakes:
 
-```
 echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
-```
 
-Now test Nix:
+Test Nix:
 
-```
 nix --version
-```
 
 Then run Mindustry:
 
-```
 nix run github:ImToLate1337/mindustry-flake
-```
 
 Or run the dedicated server:
 
-```
 nix run github:ImToLate1337/mindustry-flake#server
-```
-
-
